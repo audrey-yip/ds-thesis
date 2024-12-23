@@ -425,7 +425,6 @@ def snowballing(account_list):
     finally:
         driver.quit()
 
-
 if __name__ == "__main__":
     csv_file = '2nd_layer_accounts.csv'
     account_names = read_account_names_from_csv(csv_file)
