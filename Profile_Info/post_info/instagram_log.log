@@ -1,0 +1,10 @@
+2025-02-03 16:08:07,286 - ERROR - An error occurred: 'id'
+2025-02-03 16:08:07,287 - ERROR - Task <Task cancelled name='Task-6' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,287 - ERROR - Task <Task cancelled name='Task-8' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,287 - ERROR - Task <Task cancelled name='Task-11' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,289 - ERROR - Task <Task cancelled name='Task-14' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,289 - ERROR - Task <Task cancelled name='Task-17' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,290 - ERROR - Task <Task cancelled name='Task-20' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,290 - ERROR - Task <Task cancelled name='Task-23' coro=<process_one_video() done, defined at /Users/audreyyip/Desktop/ds-thesis/Profile_Info/post_info/igMetadaCollector.py:181>> was cancelled
+2025-02-03 16:08:07,290 - INFO - Saved 23 posts and/or lines of metadata
+2025-02-03 16:47:42,018 - INFO - Saved 24 posts and/or lines of metadata
