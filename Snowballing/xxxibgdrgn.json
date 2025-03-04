@@ -1,0 +1,23 @@
+{
+    "all_following": [
+        {
+            "pk": "68724489797",
+            "pk_id": "68724489797",
+            "id": "68724489797",
+            "username": "fanplusonedotcom",
+            "full_name": "FAM",
+            "is_private": false,
+            "fbid_v2": "17841468693920561",
+            "third_party_downloads_enabled": 1,
+            "strong_id__": "68724489797",
+            "profile_pic_id": "3436339941612381960_68724489797",
+            "profile_pic_url": "https://scontent-lga3-1.cdninstagram.com/v/t51.2885-19/455704273_482331144509886_4672443909368672470_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2AFXD5mE4TM535AW7iT9WVLpUmr5AQraHFHG9lYyzC80O4uYm79vEeyqclFt3iyqkTA&_nc_ohc=Sn-IyPU4DVIQ7kNvgFRwX-x&_nc_gid=e16af2b386584aaf88f352e23876c22b&edm=ALB854YBAAAA&ccb=7-5&oh=00_AYBr5om82uA8lTfqdR5jRSb5SyMDGtO2uLw4_7y_DM__Uw&oe=67CBF695&_nc_sid=ce9561",
+            "is_verified": false,
+            "has_anonymous_profile_picture": false,
+            "account_badges": [],
+            "latest_reel_media": 1740981697,
+            "is_favorite": false
+        }
+    ],
+    "max_id": null
+}

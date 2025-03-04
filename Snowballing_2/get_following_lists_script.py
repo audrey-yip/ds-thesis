@@ -31,25 +31,14 @@ def get_following(account, id):
     "accept": "*/*",
     "accept-encoding": "gzip, deflate, br, zstd",
     "accept-language": "en-US,en;q=0.9",
-    "cookie": (
-        "datr=4UTGZz9QFOv83f-GWiRTQVK3; "
-        "ig_did=EB28A296-4AEA-49C4-AECC-044931EBF73E; "
-        "dpr=1.7999999523162842; "
-        "mid=Z8ZE4QAEAAHJ6aXAdgHIT-817cjp; "
-        "csrftoken=wkj97SKKL7Ib2y6qevgGoiHS6dgZusbb; "
-        "ig_nrcb=1; "
-        "wd=872x914; "
-        "ds_user_id=72135168504; "
-        "sessionid=72135168504%3AsKJbGxmuavkBP1%3A17%3AAYfvjUylrSjapk6oKZ-M3NfGiM-N34V4sVUbePtBfQ; "
-        'rur="RVA\\05472135168504\\0541772607502:01f77562ece9dccb75763c2c3e845ebeccbdefbce597c8eeded7fba27b7f8f23ed8d45dd"'
-    ),
+    "cookie": "datr=4UTGZz9QFOv83f-GWiRTQVK3; ig_did=EB28A296-4AEA-49C4-AECC-044931EBF73E; dpr=1.7999999523162842; mid=Z8ZE4QAEAAHJ6aXAdgHIT-817cjp; ig_nrcb=1; ps_l=1; ps_n=1; csrftoken=n2orY8WmsOar0vEGzrnjLR306MCsGHMb; sessionid=69869436110%3AypiM5snQPTQLey%3A11%3AAYfeJar_49x3jF0Qf3Ivdb1INd2ogIJlR-8xeIMOtw; ds_user_id=69869436110; rur=\"NHA\\05469869436110\\0541772665748:01f70d905b02d86db248ee0558e22a7e808d9777a02b26f2fc3050f18973b13ea39a626b\"; wd=872x914",
     "priority": "u=1, i",
-    "referer": "https://www.instagram.com/scmpnews/following/",
-    "sec-ch-prefers-color-scheme": "dark",
-    "sec-ch-ua": '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"',
-    "sec-ch-ua-full-version-list": '"Not A(Brand";v="8.0.0.0", "Chromium";v="132.0.6834.160", "Google Chrome";v="132.0.6834.160"',
+    "referer": "https://www.instagram.com/wong_kar_wai/following/",
+    "sec-ch-prefers-color-scheme": "light",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Google Chrome\";v=\"132\"",
+    "sec-ch-ua-full-version-list": "\"Not A(Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"132.0.6834.160\", \"Google Chrome\";v=\"132.0.6834.160\"",
     "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-model": '""',
+    "sec-ch-ua-model": "\"\"",
     "sec-ch-ua-platform": "macOS",
     "sec-ch-ua-platform-version": "14.6.1",
     "sec-fetch-dest": "empty",
@@ -57,12 +46,13 @@ def get_following(account, id):
     "sec-fetch-site": "same-origin",
     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
     "x-asbd-id": "359341",
-    "x-csrftoken": "wkj97SKKL7Ib2y6qevgGoiHS6dgZusbb",
+    "x-csrftoken": "n2orY8WmsOar0vEGzrnjLR306MCsGHMb",
     "x-ig-app-id": "936619743392459",
-    "x-ig-www-claim": "hmac.AR1dPQMB70iMzNfm5xAsqGijl_HSgjaxPNOrRXWLyAzau1YO",
+    "x-ig-www-claim": "hmac.AR3JRwqPGoKm62ZMR4_IuS8d3Ob0x4S0OUEY3EbNbQ5AH8YI",
     "x-requested-with": "XMLHttpRequest",
-    "x-web-session-id": "1dll6s:ka0kq9:62egfc"
+    "x-web-session-id": "8hc18u:ryn4it:dccuo2"
 }
+
 
 
 
@@ -90,10 +80,13 @@ def get_following(account, id):
         
         retries = 0
         while retries < max_retries:
-            response = requests.get(url, headers=headers)
-            response.raise_for_status() 
+            response = requests.get(url, headers=headers, allow_redirects=False)
             if response.status_code == 200:
                 break  # Success, continue scraping
+
+            elif response.status_code == 302:
+                print("Breaking loop because of redirect.")
+                return
             
             elif response.status_code in [401, 400, 429]:  # Rate-limited or temporarily banned
                 print(f"Rate limited! Waiting {retry_wait_time} seconds...")
@@ -109,9 +102,8 @@ def get_following(account, id):
         try:
             # Parse JSON response
             data = response.json()
-            print(data)
         except json.JSONDecodeError:
-            print("Failed to parse JSON response.")
+            print(f"Failed to parse JSON response")
             exit()
 
         users = data.get("users", [])
@@ -159,7 +151,11 @@ for index, row in account_mapping.iterrows():
             print(f"Skipping {account} - Already fully scraped.")
             continue
         else:
-            get_following(account, id)
+            result = get_following(account, id)
     else:
         print(f"File does not exist for {account}, starting from 0.")
-        get_following(account, id)
+        result = get_following(account, id)
+    
+    if result == None:
+        print("Status Code 302 Redirect. Header no longer valid, breaking.")
+        break
