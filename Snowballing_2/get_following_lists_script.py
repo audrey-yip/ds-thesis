@@ -23,39 +23,48 @@ account_mapping = pd.read_csv('account_id_mapping.csv')
 account_mapping
 
 # %%
+# this is new version from chatgpt
+
+import os
+import json
+import time
+import random
+import requests
+
 def get_following(account, id):
     base_url = f"https://www.instagram.com/api/v1/friendships/{id}/following/"
     save_file = f"following_jsons/{account}_{id}.json"
-
+    
+    session = requests.Session()
+    
     headers = {
-    "accept": "*/*",
-    "accept-encoding": "gzip, deflate, br, zstd",
-    "accept-language": "en-US,en;q=0.9",
-    "cookie": "datr=4UTGZz9QFOv83f-GWiRTQVK3; ig_did=EB28A296-4AEA-49C4-AECC-044931EBF73E; dpr=1.7999999523162842; mid=Z8ZE4QAEAAHJ6aXAdgHIT-817cjp; ig_nrcb=1; ps_l=1; ps_n=1; csrftoken=n2orY8WmsOar0vEGzrnjLR306MCsGHMb; sessionid=69869436110%3AypiM5snQPTQLey%3A11%3AAYfeJar_49x3jF0Qf3Ivdb1INd2ogIJlR-8xeIMOtw; ds_user_id=69869436110; rur=\"NHA\\05469869436110\\0541772665748:01f70d905b02d86db248ee0558e22a7e808d9777a02b26f2fc3050f18973b13ea39a626b\"; wd=872x914",
-    "priority": "u=1, i",
-    "referer": "https://www.instagram.com/wong_kar_wai/following/",
-    "sec-ch-prefers-color-scheme": "light",
-    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Google Chrome\";v=\"132\"",
-    "sec-ch-ua-full-version-list": "\"Not A(Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"132.0.6834.160\", \"Google Chrome\";v=\"132.0.6834.160\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-model": "\"\"",
-    "sec-ch-ua-platform": "macOS",
-    "sec-ch-ua-platform-version": "14.6.1",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin",
-    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
-    "x-asbd-id": "359341",
-    "x-csrftoken": "n2orY8WmsOar0vEGzrnjLR306MCsGHMb",
-    "x-ig-app-id": "936619743392459",
-    "x-ig-www-claim": "hmac.AR3JRwqPGoKm62ZMR4_IuS8d3Ob0x4S0OUEY3EbNbQ5AH8YI",
-    "x-requested-with": "XMLHttpRequest",
-    "x-web-session-id": "8hc18u:ryn4it:dccuo2"
-}
-
-
-
-
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cookie": "datr=pLlfZ9oUt-gimOGZkhSv2che; ig_did=ADA02B91-358F-4A94-B771-BC1991C1508A; ig_nrcb=1; ps_l=1; ps_n=1; dpr=1.7999999523162842; mid=Z55x1gAEAAEeXrf1nto_oqWIJ5Ce; csrftoken=EGs4IcNIQxOP3CD5C2qv6f8JKeM34qWe; ds_user_id=69869436110; sessionid=69869436110%3A2YS7jv0uGNjhQu%3A14%3AAYc_kTy2nI9SKWwIeO4ptW0iYTrnk8Fjga9RC_EwLQ; wd=869x914; rur=\"NHA,69869436110,1772827539:01f76cb776d571d44058f1c903447eac07410be777f3f12b5f96e6c8597e3358fe4dd91b\"",
+    "Priority": "u=1, i",
+    "Referer": "https://www.instagram.com/gareth_tong/following/",
+    "Sec-CH-Prefers-Color-Scheme": "light",
+    "Sec-CH-UA": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Google Chrome\";v=\"132\"",
+    "Sec-CH-UA-Full-Version-List": "\"Not A(Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"132.0.6834.160\", \"Google Chrome\";v=\"132.0.6834.160\"",
+    "Sec-CH-UA-Mobile": "?0",
+    "Sec-CH-UA-Model": "\"\"",
+    "Sec-CH-UA-Platform": "\"macOS\"",
+    "Sec-CH-UA-Platform-Version": "\"14.6.1\"",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
+    "X-ASBD-ID": "359341",
+    "X-CSRFToken": "EGs4IcNIQxOP3CD5C2qv6f8JKeM34qWe",
+    "X-IG-App-ID": "936619743392459",
+    "X-IG-WWW-Claim": "hmac.AR3JRwqPGoKm62ZMR4_IuS8d3Ob0x4S0OUEY3EbNbQ5AHyJ4",
+    "X-Requested-With": "XMLHttpRequest",
+    "X-Web-Session-ID": "imd0rr:yduuzh:vnu3pk"
+    }
+    
+    session.headers.update(headers)
+    
     # Load previous progress if available
     if os.path.exists(save_file):
         with open(save_file, "r") as f:
@@ -65,71 +74,63 @@ def get_following(account, id):
     else:
         all_following = []
         max_id = None
-
+    
     print(f"{len(all_following)} accounts found for {account} so far...")
-
-    # Retry parameters
+    
     max_retries = 5
-    retry_wait_time = 60  # Wait 1 minute if blocked
-
+    retry_wait_time = 60
+    
     while True:
-        # Build the URL with pagination
         url = f"{base_url}?count=12"
         if max_id:
             url += f"&max_id={max_id}"
         
         retries = 0
         while retries < max_retries:
-            response = requests.get(url, headers=headers, allow_redirects=False)
-            if response.status_code == 200:
-                break  # Success, continue scraping
-
-            elif response.status_code == 302:
-                print("Breaking loop because of redirect.")
-                return
+            response = session.get(url, allow_redirects=False)
             
-            elif response.status_code in [401, 400, 429]:  # Rate-limited or temporarily banned
-                print(f"Rate limited! Waiting {retry_wait_time} seconds...")
+            if response.status_code == 200:
+                session.cookies.update(response.cookies)
+                break
+            elif response.status_code == 302:
+                print("Breaking loop due to redirect.")
+                return
+            elif response.status_code in [401, 400, 429]:
+                print(f"Rate limited! (Error {response.status_code}) Waiting {retry_wait_time} seconds...")
                 time.sleep(retry_wait_time)
                 retries += 1
-                retry_wait_time *= 2  # Exponential backoff
-                continue  # Retry request
-            
+                retry_wait_time *= 2
+                continue
             else:
                 print(f"Error: {response.status_code}, {response.text}")
                 exit()
-
+        
         try:
-            # Parse JSON response
             data = response.json()
         except json.JSONDecodeError:
-            print(f"Failed to parse JSON response")
+            print("Failed to parse JSON response")
             exit()
-
+        
         users = data.get("users", [])
         if not users:
             print("No more users found.")
-            break  # Stop scraping if no users found
-
-        all_following.extend(users)  # Add new users to list
-        max_id = data.get("next_max_id")  # Update max_id for pagination
-
-        # Save after each request
+            break
+        
+        all_following.extend(users)
+        max_id = data.get("next_max_id")
+        
         with open(save_file, "w") as f:
             json.dump({"all_following": all_following, "max_id": max_id}, f, indent=4)
         print(f"[{account}] Saved progress: {len(all_following)} accounts.")
-
-        # Stop if there are no more pages
+        
         if not max_id:
             break
-
-        # Delay to prevent bans
-        time.sleep(random.uniform(1,2))
-
-    # Final save
+        
+        time.sleep(random.uniform(1, 2))
+    
     with open(save_file, "w") as f:
         json.dump({"all_following": all_following, "max_id": None}, f, indent=4)
-
+    
     print(f"Scraping complete for {account}! Total accounts retrieved: {len(all_following)}")
 
 # %%
@@ -156,6 +157,7 @@ for index, row in account_mapping.iterrows():
         print(f"File does not exist for {account}, starting from 0.")
         result = get_following(account, id)
     
-    if result == None:
-        print("Status Code 302 Redirect. Header no longer valid, breaking.")
-        break
+    #if result == None:
+        #print("Status Code 302 Redirect. Header no longer valid, breaking.")
+        #break
+
