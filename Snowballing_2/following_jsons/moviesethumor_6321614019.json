@@ -1,0 +1,23 @@
+{
+    "all_following": [
+        {
+            "pk": "1735416066",
+            "pk_id": "1735416066",
+            "id": "1735416066",
+            "username": "welchsfruitsnck",
+            "full_name": "Welch's Fruit Snacks",
+            "is_private": false,
+            "fbid_v2": "17841401682007115",
+            "third_party_downloads_enabled": 1,
+            "strong_id__": "1735416066",
+            "profile_pic_id": "3459313976322307740_1735416066",
+            "profile_pic_url": "https://scontent-lga3-1.cdninstagram.com/v/t51.2885-19/460171556_2229781184050166_8298875343389812191_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2AFsxBQ8_hoAzfyjGaMTKwicvdywIABe52xbVCBD_MAHkwhYnZ-bolU5pV0kpZoLN50&_nc_ohc=5TNSNHqLUOcQ7kNvgHujm1r&_nc_gid=cb8fa669e2f14dad8af176cdb5576e08&edm=ALB854YBAAAA&ccb=7-5&oh=00_AYBZIdUphJI6W-WluCrjdeOK0CsW_D0x4EXLBz1_YkhCAw&oe=67CFF2D0&_nc_sid=ce9561",
+            "is_verified": true,
+            "has_anonymous_profile_picture": false,
+            "account_badges": [],
+            "latest_reel_media": 0,
+            "is_favorite": false
+        }
+    ],
+    "max_id": null
+}
